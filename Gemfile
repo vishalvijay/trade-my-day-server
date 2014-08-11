@@ -49,3 +49,7 @@ gem 'settingslogic'
 
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'gcm'
+
+#heroku
+gem 'rails_12factor', group: :production
+ruby "2.1.1"
