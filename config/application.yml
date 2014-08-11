@@ -1,0 +1,12 @@
+defaults: &defaults
+  regx_email: !ruby/regexp /\A[^@]+@([^@\.]+\.)+[^@\.]+\z/
+  gcm_api_key: "AIzaSyCxJ8BifGY7nh7iPmWGGaOSRlBlhrFyET8"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
