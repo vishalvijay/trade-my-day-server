@@ -14,9 +14,7 @@ class Api::V1::UserAccountController < AppController
         if user.nil?
           user = UserSocialAccount.find_by_uuid_and_provider(social_user[:uuid],social_user[:provider]).try(:user)
         end
-        is_new_user = false
         if user.nil?
-          is_new_user = true
           user = User.create_social_user social_user
         else
           user.name = social_user[:name]
@@ -32,7 +30,7 @@ class Api::V1::UserAccountController < AppController
           user.devices.where(device_id: params[:device_id]).destroy_all
           user.devices.build({session_id: session.id, device_id: params[:device_id], device_type: params[:device_type]})
           user.save
-          respond_with user
+          respond_with current_api_user
         end
       else
         if social_user[:error].nil? && social_user[:email].blank?
