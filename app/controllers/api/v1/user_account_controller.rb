@@ -32,10 +32,7 @@ class Api::V1::UserAccountController < AppController
           user.devices.where(device_id: params[:device_id]).destroy_all
           user.devices.build({session_id: session.id, device_id: params[:device_id], device_type: params[:device_type]})
           user.save
-          response_json = {}
-          response_json[:is_new_user] = is_new_user
-          response_json[:user] = user
-          render json: response_json, status: :ok
+          respond_with user
         end
       else
         if social_user[:error].nil? && social_user[:email].blank?
