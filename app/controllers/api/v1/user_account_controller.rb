@@ -30,7 +30,7 @@ class Api::V1::UserAccountController < AppController
           user.devices.where(device_id: params[:device_id]).destroy_all
           user.devices.build({session_id: session.id, device_id: params[:device_id], device_type: params[:device_type]})
           user.save
-          respond_with current_api_user
+          respond_with current_api_user, status: :created, location: '/'
         end
       else
         if social_user[:error].nil? && social_user[:email].blank?
