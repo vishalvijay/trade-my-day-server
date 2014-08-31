@@ -27,7 +27,7 @@ class Api::V1::UserAccountController < AppController
           social_account.user = user
           social_account.save
           sign_in user
-          user.devices.where(device_id: params[:device_id]).destroy_all
+          Device.where(device_id: params[:device_id]).destroy_all
           user.devices.build({session_id: session.id, device_id: params[:device_id], device_type: params[:device_type]})
           user.save
           respond_with current_api_user, status: :created, location: '/'
