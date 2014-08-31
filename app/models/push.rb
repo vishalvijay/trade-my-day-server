@@ -4,6 +4,6 @@ class Push < ActiveRecord::Base
 
   private
     def send_push
-      PushNotification.send Device.all.map(&:device_id), {title: title, message: message, type: ptype}
+      PushNotification.send Device.all.map(&:device_id), {title: title, message: message, type: ptype, at: created_at}
     end
 end
